@@ -7,7 +7,9 @@
     <title>Word Guess Game</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
@@ -21,13 +23,26 @@
     remaining guesses
     previous guesses -->
 
-    <div id="game">
+    <div class="jumbotron">
+        <h1 class="display-4">Word Guess Game!</h1>
+        <hr class="my-4">
+        <div id="word"></div>
+        <div id="guessed"></div>
+        <div id="guesses"></div>
+        <div id="wins"></div>
+        <div id="losses"></div>
+        <div id="gameState"></div>
+    </div>
+
+    <!-- <div id="game">
 
     </div>
     <div id="word"></div>
     <div id="guessed"></div>
     <div id="guesses"></div>
-    <div id="gameState"></div>
+    <div id="wins"></div>
+    <div id="losses"></div>
+    <div id="gameState"></div> -->
 
     <script src="assets/javascript/game.js" async defer></script>
 </body>

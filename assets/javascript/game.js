@@ -1,4 +1,9 @@
-const htmlNode = document.getElementById("game");
+const wordNode = document.getElementById("word");
+const guessedNode = document.getElementById("guessed");
+const guessesNode = document.getElementById("guesses");
+const winsNode = document.getElementById("wins");
+const lossesNode = document.getElementById("losses");
+const gameStateNode = document.getElementById("gameState");
 const alphabet = "qwertyuiopasdfghjklzxcvbnm"
 const GUESSTOTAL = 10
 
@@ -14,73 +19,62 @@ var game = {
     wordIndex: 0,
 
     guessLetter: function (letter) {
-
         if (this.actualWord.indexOf(letter) === -1) {
             if (this.wrongGuesses.indexOf(letter) === -1) {
                 // Wrong Guess
                 this.wrongGuesses.push(letter);
                 this.wrongGuesses.sort();
-                //sort
-                //split("")
-                //join("")
                 this.remainingGuesses += -1
                 if (this.remainingGuesses === 0) {
                     //game over code here
                     this.losses++;
-                    htmlNode.innerHTML = "<h2>Word: " + this.wordProgress.join("") + "</h2>";
-                    htmlNode.innerHTML += "<h2>Guessed Letters: " + this.wrongGuesses + "</h2>";
-                    htmlNode.innerHTML += "<h2>Reamining Guesses: " + this.remainingGuesses + "</h2>";
-                    htmlNode.innerHTML += "<h2>Wins: " + this.wins + "</h2>";
-                    htmlNode.innerHTML += "<h2>Losses: " + this.losses + "</h2>";
-                    htmlNode.innerHTML += "<h2>Game Over</h2>";
-                    htmlNode.innerHTML += "<h3>Press any key to continue</h3>";
+                    wordNode.innerHTML = "<h4>Word: " + this.wordProgress.join("") + "</h4>";
+                    guessedNode.innerHTML = "<h4>Guessed Letters: " + this.wrongGuesses + "</h4>";
+                    guessesNode.innerHTML = "<h4>Reamining Guesses: " + this.remainingGuesses + "</h4>";
+                    winsNode.innerHTML = "<h4>Wins: " + this.wins + "</h4>";
+                    lossesNode.innerHTML = "<h4>Losses: " + this.losses + "</h4>";
+                    gameStateNode.innerHTML = "<h3>Game Over</h3>";
+                    gameStateNode.innerHTML += "<h5>Press any key to continue</h5>";
                     this.inProgress = false;
-
-
                 } else {
                     //game continues
-                    htmlNode.innerHTML = "<h2>Word: " + this.wordProgress.join("") + "</h2>";
-                    htmlNode.innerHTML += "<h2>Guessed Letters: " + this.wrongGuesses + "</h2>";
-                    htmlNode.innerHTML += "<h2>Reamining Guesses: " + this.remainingGuesses + "</h2>";
-                    htmlNode.innerHTML += "<h2>Wins: " + this.wins + "</h2>";
-                    htmlNode.innerHTML += "<h2>Losses: " + this.losses + "</h2>";
+                    wordNode.innerHTML = "<h4>Word: " + this.wordProgress.join("") + "</h4>";
+                    guessedNode.innerHTML = "<h4>Guessed Letters: " + this.wrongGuesses + "</h4>";
+                    guessesNode.innerHTML = "<h4>Reamining Guesses: " + this.remainingGuesses + "</h4>";
+                    winsNode.innerHTML = "<h4>Wins: " + this.wins + "</h4>";
+                    lossesNode.innerHTML = "<h4>Losses: " + this.losses + "</h4>";
+                    gameStateNode.innerHTML = "";
                 }
-
             };
         } else if (this.wordProgress.indexOf(letter) === -1) {
-            //console.log("ping1");
             for (let i = 0; i < this.actualWord.length; i++) {
                 if (this.actualWord[i] === letter) {
                     this.wordProgress[i] = letter;
-                    //console.log("pingx", this.wordProgress, letter);
                 }
-
             }
             if (this.wordProgress.indexOf("-") === -1) {
-                //console.log("ping2");
                 //win
                 this.wins++;
-                htmlNode.innerHTML = "<h2>Word: " + this.wordProgress.join("") + "</h2>";
-                htmlNode.innerHTML += "<h2>Guessed Letters: " + this.wrongGuesses + "</h2>";
-                htmlNode.innerHTML += "<h2>Reamining Guesses: " + this.remainingGuesses + "</h2>";
-                htmlNode.innerHTML += "<h2>Wins: " + this.wins + "</h2>";
-                htmlNode.innerHTML += "<h2>Losses: " + this.losses + "</h2>";
-                htmlNode.innerHTML += "<h2>Win!</h2>";
-                htmlNode.innerHTML += "<h3>Press any key to continue</h3>";
+                wordNode.innerHTML = "<h4>Word: " + this.wordProgress.join("") + "</h4>";
+                guessedNode.innerHTML = "<h4>Guessed Letters: " + this.wrongGuesses + "</h4>";
+                guessesNode.innerHTML = "<h4>Reamining Guesses: " + this.remainingGuesses + "</h4>";
+                winsNode.innerHTML = "<h4>Wins: " + this.wins + "</h4>";
+                lossesNode.innerHTML = "<h4>Losses: " + this.losses + "</h4>";
+                gameStateNode.innerHTML = "<h3>Win!</h3>";
+                gameStateNode.innerHTML += "<h5>Press any key to continue</h5>";
                 this.inProgress = false;
             } else {
-                //console.log("ping3");
                 //game continues
-                htmlNode.innerHTML = "<h2>Word: " + this.wordProgress.join("") + "</h2>";
-                htmlNode.innerHTML += "<h2>Guessed Letters: " + this.wrongGuesses + "</h2>";
-                htmlNode.innerHTML += "<h2>Reamining Guesses: " + this.remainingGuesses + "</h2>";
-                htmlNode.innerHTML += "<h2>Wins: " + this.wins + "</h2>";
-                htmlNode.innerHTML += "<h2>Losses: " + this.losses + "</h2>";
+                wordNode.innerHTML = "<h4>Word: " + this.wordProgress.join("") + "</h4>";
+                guessedNode.innerHTML = "<h4>Guessed Letters: " + this.wrongGuesses + "</h4>";
+                guessesNode.innerHTML = "<h4>Reamining Guesses: " + this.remainingGuesses + "</h4>";
+                winsNode.innerHTML = "<h4>Wins: " + this.wins + "</h4>";
+                lossesNode.innerHTML = "<h4>Losses: " + this.losses + "</h4>";
+                gameStateNode.innerHTML = "";
             }
         };
-
-
     },
+
     newGame: function () {
         this.remainingGuesses = GUESSTOTAL;
         this.wrongGuesses = [];
@@ -91,21 +85,20 @@ var game = {
             this.wordProgress[i] = "-";
         }
         this.inProgress = true;
-        htmlNode.innerHTML = "<h2>Word: " + this.wordProgress.join("") + "</h2>";
-        htmlNode.innerHTML += "<h2>Guessed Letters: " + this.wrongGuesses + "</h2>";
-        htmlNode.innerHTML += "<h2>Reamining Guesses: " + this.remainingGuesses + "</h2>";
-        htmlNode.innerHTML += "<h2>Wins: " + this.wins + "</h2>";
-        htmlNode.innerHTML += "<h2>Losses: " + this.losses + "</h2>";
+        wordNode.innerHTML = "<h4>Word: " + this.wordProgress.join("") + "</h4>";
+        guessedNode.innerHTML = "<h4>Guessed Letters: " + this.wrongGuesses + "</h4>";
+        guessesNode.innerHTML = "<h4>Reamining Guesses: " + this.remainingGuesses + "</h4>";
+        winsNode.innerHTML = "<h4>Wins: " + this.wins + "</h4>";
+        lossesNode.innerHTML = "<h4>Losses: " + this.losses + "</h4>";
+        gameStateNode.innerHTML = "";
     },
-
 };
 
-htmlNode.innerHTML = "<h2>Word: " + game.wordProgress.join("") + "</h2>";
-htmlNode.innerHTML += "<h2>Guessed Letters: " + game.wrongGuesses + "</h2>";
-htmlNode.innerHTML += "<h2>Reamining Guesses: " + game.remainingGuesses + "</h2>";
-htmlNode.innerHTML += "<h2>Wins: " + game.wins + "</h2>";
-htmlNode.innerHTML += "<h2>Losses: " + game.losses + "</h2>";
-
+wordNode.innerHTML = "<h4>Word: " + game.wordProgress.join("") + "</h4>";
+guessedNode.innerHTML = "<h4>Guessed Letters: " + game.wrongGuesses + "</h4>";
+guessesNode.innerHTML = "<h4>Reamining Guesses: " + game.remainingGuesses + "</h4>";
+winsNode.innerHTML = "<h4>Wins: " + game.wins + "</h4>";
+lossesNode.innerHTML = "<h4>Losses: " + game.losses + "</h4>";
 
 document.onkeyup = function (event) {
     const inputKey = event.key;
@@ -115,4 +108,3 @@ document.onkeyup = function (event) {
         game.newGame();
     }
 };
-
